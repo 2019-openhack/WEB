@@ -9,6 +9,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.word_info, name='word_info'),
+    path('word/', views.word_show, name='word_show'),
     path('mean/', views.word_mean, name='word_mean')
-    ]
+]

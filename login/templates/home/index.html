@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{% load static %}
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js"></script>
+		<link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css">
+	</head>
+	<body>
+		{% if newbie %}
+		<script>
+			alert("welcome Newbie")	
+		</script>
+		{% endif %}
+		
+		
+		<div class="intro-lead-in">Mr/Ms "{{user.username}}"</div>
+
+		<a href='logout'>logout</a>
+		<a href='login'>login</a>
+		<a href='file'>file_upload</a>
+		안녕하세요!!! 우리는 여기에 시작 페이지를 만들거예요
+	</body>
+</html>
