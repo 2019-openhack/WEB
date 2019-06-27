@@ -10,4 +10,5 @@ from . import views
 
 urlpatterns = [
     path('', views.word_info, name='word_info'),
-]
+    path('mean/', views.word_mean, name='word_mean')
+    ]
