@@ -150,6 +150,11 @@ class preprocessing:
         print('[INFO] clean text file')
 
     def word_Frequency(self):
+        '''
+        ===============================
+        return : Counter object {'word' : 'freq'}
+        '''
+        
         f = open(self.output_path,"r")
 
         text = f.readline()
@@ -186,7 +191,7 @@ def gen_example(text_path, word_list):
     
     ==================================
     
-    return : str
+    return : dic {'word', 'sentence'}
     '''
     
     example = {}
