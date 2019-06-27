@@ -10,5 +10,5 @@ from . import views
 
 urlpatterns = [
     path('', views.login, name='social_login'),
-    path('social/', include('social_django.urls',namespace='social')),
+    path('logout/', views.logout, name='logout'),
 ]
