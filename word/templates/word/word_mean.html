@@ -7,12 +7,18 @@
 <body>
     <div class="container">
            <div class="content">
-		   <p>11111
-		   {% for mean in means %}
-		   {{ mean.meaning }}
-		   {% endfor %}
+		   <p>
+		   	{{ means.meaning }}
 		   </p>
 	   </div>
+		<div id="side_right">
+		<form action = '/' method='post'>
+		{% csrf_token %}
+		<button name = "mean"
+			style="width100pt; hegith;100pt"> 다음</button>
+		</form>
+		</div>
+	
     </div>
 </body>
 </html>

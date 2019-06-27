@@ -4,10 +4,19 @@
 	<title>영어단어장</title>
 	<meta charset="utf-8">
 <style type = "text/css">
-	div#side_left{
+	div
+	#word_lap{
+		width:100%;
+		height:70%;
+	}
+	#timer{
+		width:100%;
+		height:30%;
+	}
+	#side_left{
 	float:left; 
 	width:30%;
-	height:100%;
+	height:70%;
 	}
 	
 	#side_middle{
@@ -22,8 +31,8 @@
 	#side_right{
 		position:relative;
 	 float:right; 
-	 width:20%;
-		 top :70%;
+	 width:30%;
+		 height :70%;
 	}
 </style>
 		</head>
@@ -36,37 +45,60 @@
 		</div>
 		<div id="side_middle"
 			style="text-align:center">
+			<div id="word_lap">
 			<div>
 			<p style="font-size:100px">
-				{% for word in words %}
-				{{word.word}}
-				{% endfor %}
+			{{words.word}}
 			</p>
 			</div>
+			
 			<div>
 				<p>
-				{% for word in words %}
-				{{word.example}}
-				{% endfor %}
+			{{words.example}}
 				</p>
 			</div>
+			</div>
 		</div>
+		<div id="timer">
+		<SCRIPT language = "javascript">
+	
+		var SetTime=5;
+		function msg_time(){
+	
+		var msg = "남은 시간 " + SetTime ;
+		SetTime--;
+		document.write(msg);
+		if(SetTime <0){
+			clearInterval(tid);
+			}
+		}	
+		
+		
+		</script>
+
+		
+		<form action = 'next html' method='post'>
+		{% csrf_token %}
+		<button name = "check"
+			style="width100pt; hegith;100pt">check </button>
+		</form>
+
 		<div id="side_right">
 		<form action = '/mean/' method='post'>
 		{% csrf_token %}
 		<button name = "mean"
-			style="width100pt; hegith;100pt"> 뜻</button>
+			style="width100pt; hegith;100pt"> 다음</button>
+		{{words.update_counter}}
 		</form>
 		</div>
+		</div>
 <!--
-	{% for word in words %}
 	<p>{{words.word}}</p>
 	<p>{{words.example}}</p>
 	<form action = '/mean/' method='post'>
 		{% csrf_token %}
 		<button name = "mean" > 뜻</button>
 	</form>
-	{% endfor %}
 -->
 	<body>
     </table>
