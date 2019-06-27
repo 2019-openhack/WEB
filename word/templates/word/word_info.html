@@ -3,24 +3,71 @@
 <head>
 	<title>영어단어장</title>
 	<meta charset="utf-8">
-</head>
+<style type = "text/css">
+	div#side_left{
+	float:left; 
+	width:30%;
+	height:100%;
+	}
+	
+	#side_middle{
+	position:absolute;
+	top:20%;
+	left:30%;
+	width:40%;
+	height:50%;
+	overflow:hidden;
+	}
+	
+	#side_right{
+		position:relative;
+	 float:right; 
+	 width:20%;
+		 top :70%;
+	}
+</style>
+		</head>
 <body>
-<div class="container">
+	<div class="container">
     <table class="table table-striped">
-        <thead>
-        <tr>
-            <td><B>뜻</B></td>
-            <td><B>영어</B></td>
-        </tr>
-        </thead>
-        <tbody>
-        {% for word in words %}
-        <tr>
-            <td>{{words.word}}q</td>
-            <td>{{words.meaning}}2</td>
-            <td>{{words.example}}3</td>
-        </tr>
-        {% endfor %}
-        <tbody>
+        <body>
+
+		<div id="side_left">
+		</div>
+		<div id="side_middle"
+			style="text-align:center">
+			<div>
+			<p style="font-size:100px">
+				{% for word in words %}
+				{{word.word}}
+				{% endfor %}
+			</p>
+			</div>
+			<div>
+				<p>
+				{% for word in words %}
+				{{word.example}}
+				{% endfor %}
+				</p>
+			</div>
+		</div>
+		<div id="side_right">
+		<form action = '/mean/' method='post'>
+		{% csrf_token %}
+		<button name = "mean"
+			style="width100pt; hegith;100pt"> 뜻</button>
+		</form>
+		</div>
+<!--
+	{% for word in words %}
+	<p>{{words.word}}</p>
+	<p>{{words.example}}</p>
+	<form action = '/mean/' method='post'>
+		{% csrf_token %}
+		<button name = "mean" > 뜻</button>
+	</form>
+	{% endfor %}
+-->
+	<body>
     </table>
 </body>
