@@ -6,6 +6,15 @@ from django.shortcuts import render
 def file_upload(request):
     return render(request, 'file_upload/index.html',{})
 
+
+def sendRequest(request):
+    if request.method == 'POST':
+        print(os.getcwd())
+        print("POST method")
+
+    return render(request, 'file_upload/good.html',{})
+
+'''
 # Create your views here.
 def file_upload2(request):
     form = fileUploadForm()
@@ -31,5 +40,5 @@ def file_upload2(request):
         form = fileUploadForm()
 
     return render(request, 'file_upload/index.html', {'form': form})
-
+'''
    
