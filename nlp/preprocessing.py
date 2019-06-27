@@ -8,10 +8,12 @@ Created on Thu Jun 27 18:55:35 2019
 import os
 import re
 import nltk
+import numpy as np
 from tqdm import tqdm
 from collections import Counter
 from nltk.corpus import stopwords 
 from nltk.tokenize import word_tokenize 
+from nltk.tokenize import sent_tokenize
 from tkinter.filedialog import askopenfilename 
 from pdfminer.pdfdocument import PDFDocument
 from pdfminer.pdfparser import PDFParser
@@ -40,8 +42,6 @@ class preprocessing:
 
     def pdf2txt(self):
         '''
-        input_path : str, PDF File
-
         =============================
 
         return : str, text File path
@@ -107,15 +107,12 @@ class preprocessing:
 
         outfp.close()
         infp.close()
+        
+        return self.output_path
     
     def clean_text(self):
         '''
-        path : str, text File Path
-
-
-        ===========================
-
-        return : list, sentences
+        ==========================
         '''
 
         f = open(self.output_path,"rb")
@@ -151,26 +148,28 @@ class preprocessing:
         f.close()
         
         print('[INFO] clean text file')
-        
+
     def word_Frequency(self):
         f = open(self.output_path,"r")
-        
+
         text = f.readline()
-        
+
         # 단어의 빈도수
         shortword = re.compile(r'\W*\b\w{1,2}\b')
         text = shortword.sub('', text)
-        
+
         stop_words = set(stopwords.words('english')) 
         word_tokens = word_tokenize(text)
-        
+
         result = [] 
-        
+
         # 불용어 제거
         for w in word_tokens: 
             if w not in stop_words: 
-                parsing = re.sub('[-=+,#/\?:^$.@*\"※~&%}{ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]', '', w)
-                
+                parsing = ''.join([i for i in w if not i.isdigit()]) 
+                parsing = re.sub('[-=+,#/\?:^$.@*\"※~&%}{ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]', '', parsing)
+
+
                 if parsing and parsing.isdigit() == False and len(parsing) > 2:
                     result.append(w)  
 
@@ -180,12 +179,55 @@ class preprocessing:
         
         return cnt
     
-'''    
-input_path ='C:/Users/JM/Desktop/MCNN.pdf'
+def gen_example(text_path, word_list):
+    '''
+    text_path : list, text file paths
+    word : str, generate example
+    
+    ==================================
+    
+    return : str
+    '''
+    
+    example = {}
+    
+    max_len = len(word_list)
+    
+    for path in text_path:
+        f = open(path,"r")
 
-model = preprocessing(input_path)
+        text = f.readline()
+        
+        sent_tokenize_list = sent_tokenize(text)
+        
+        for sentence in sent_tokenize_list:
+            for word in word_list:
+                if word in sentence:
+                    example[word] = sentence
+                    word_list.remove(word)
+                    break
+                
+        if len(example) == max_len:
+            break
+                
+    return example
 
-model.pdf2txt()
-model.clean_text()
-model.word_Frequency()
+'''
+input_path = ['C:/Users/JM/Desktop/MCNN.pdf','C:/Users/JM/Desktop/YOLO.pdf']
+
+result = Counter('')
+text_path = []
+
+
+for path in input_path:
+    pdf = preprocessing(path)
+    output_path = pdf.pdf2txt()
+    text_path.append(output_path)
+    
+    pdf.clean_text()
+    cnt = pdf.word_Frequency()
+    
+    result += cnt
+    
+example = gen_example(text_path, result)
 '''
