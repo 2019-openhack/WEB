@@ -31,7 +31,11 @@ def isExistFile(path):
 
 def pdf2txt(input_path):
     '''
-    input_path : PDF File
+    input_path : str, PDF File
+    
+    =============================
+    
+    return : str, text File path
     '''
     
     # input
@@ -95,6 +99,15 @@ def pdf2txt(input_path):
     return output_path
     
 def clean_text(path):
+    '''
+    path : str, text File Path
+    
+    
+    ===========================
+    
+    return : list, sentences
+    '''
+    
     f = open(path,"rb")
     line_list = []
     
@@ -105,20 +118,29 @@ def clean_text(path):
     
     # remove nextline
     word = b" ".join(line_list).split()
-    sentence = b" ".join(word)
+    sentences = b" ".join(word)
     
-    print(sentence)
     
     # remove ASCII
     # define pattern 
     pattern = re.compile(b"[\x80-\xff]")
-    cleaned_txt = re.sub(pattern,b"",sentence)
+    sentences = re.sub(pattern,b"",sentences)
     
-    cleaned_txt = cleaned_txt.split(b"." )
+    sentences = sentences.split(b". ")
+    
+    cleaned_txt = []
+    
+    for sentence in sentences:
+        sentence = sentence.replace(b"- ",b'')
+        sentence = sentence.replace(b"-",b'')
+        cleaned_txt.append(sentence)
+    
     f.close()
+    
+    os.remove(path)
     
     return cleaned_txt
 
-txt_path = pdf2txt('C:/Users/JM/Git_store/pdf_to_text.pdf')
+txt_path = pdf2txt('C:/Users/JM/Desktop/MCNN.pdf')
 cleaned_text = clean_text(txt_path)
 print(cleaned_text)
