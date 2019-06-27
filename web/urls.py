@@ -21,4 +21,5 @@ urlpatterns = [
     path('',include('word.urls')),
     path('oauth/', include('social_django.urls',namespace='social')),
     path('login/', include('login.urls')),
+    path('file/',include('file_upload.urls'))
 ]
