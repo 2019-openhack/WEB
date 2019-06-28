@@ -9,9 +9,10 @@
 		<body>
 		<SECTION>
 		  <DIV id="dropzone">
-			  <FORM class="dropzone needsclick" id="demo-upload" action="." method="POST">
+			<FORM class="dropzone needsclick" id="demo-upload" action="." method="POST">
 				  {% csrf_token %}
-		    </FORM>
+		    	</FORM>
+			<button type='submit'> 단어장 만들기 </button>
 		  </DIV>
 		</SECTION>		
 
@@ -37,7 +38,6 @@
 		  }
 
 		});
-
 
 		// Now fake the file upload, since GitHub does not handle file uploads
 		// and returns a 404

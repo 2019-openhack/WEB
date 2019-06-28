@@ -11,6 +11,9 @@ def logout(request):
     auth.logout(request)
     return HttpResponseRedirect('/')
 
+def dashboard(request):
+    return render(request, "dashboard/index.html", {})
+
 def index(request):
     #로그인이 잘 되어있나 확인하기 위해 user name 길이 체크
     if (len(request.user.username) > 0):
@@ -34,6 +37,8 @@ def index(request):
             # 새로운 유저 만들었을 때
             return render(request, 'home/index.html', {'newbie': True})
         #로그인 된 상태에서 index 리턴
+        request.session['user_name'] = request.user.username
+
         return render(request, 'home/index.html', {'newbie':False})
     #로그아웃 된 상태에서 index 리턴
     return render(request, 'home/index.html', {'newbie':False})
