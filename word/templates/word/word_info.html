@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static"css/back.css"%}">
 	<title>영어단어장</title>
 	<meta charset="utf-8">
 <style type = "text/css">
@@ -38,7 +40,10 @@
 		</head>
 <body>
 	<div class="container">
-    <table class="table table-striped">
+
+		<img src="{% static "img/voca_front.jpg"%}" style="width:100%;
+		min-width:800px;">
+		<table class="table table-striped">
         <body>
 
 		<div id="side_left">
@@ -48,14 +53,18 @@
 			<div id="word_lap">
 			<div>
 			<p style="font-size:100px">
-			{{words.word}}
+<!--
+			{{dic.word}}
+-->
 			</p>
 			</div>
 			
 			<div>
-				<p>
-			{{words.example}}
-				</p>
+			<p>
+		<!--
+			{{dic.example}}
+		-->
+			</p>
 			</div>
 			</div>
 		</div>
