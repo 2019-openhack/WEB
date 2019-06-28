@@ -58,9 +58,12 @@ def file_upload(request):
 
     return render(request, 'file_upload/index.html',{})
 
-def visualization(result, path):
+def visualization(file_name, path, result):
     
     sorted_cnt = sorted(result.items(), key=lambda t : t[1],reverse=True)
+    sorted_values = sorted(result.values(), reverse=True)
+    sorted_keys = sorted(result, key=result.get, reverse=True)
+
     df = pd.DataFrame(sorted_cnt[:30],columns=['word','freq'])
 
     df = pd.DataFrame({
@@ -76,7 +79,7 @@ def visualization(result, path):
      + theme(axis_text_x=element_text(angle=45, hjust=1))
     )
 
-    ggsave(plot = p, filename = "img", path = path)
+    ggsave(plot = p, filename = file_name, path = path)
 
 def makeDic(request):
     user_name = request.session['user_name']
@@ -115,8 +118,9 @@ def makeDic(request):
             result += cnt
             print(cnt)
 
+            visualization("visualization", file_folder, result)
 
-    return render(request, '/index.html',{})
+    return render(request, 'dic/index.html',{})
 
 '''
 # Create your views here.
