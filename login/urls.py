@@ -12,5 +12,5 @@ urlpatterns = [
     path('login/', views.login, name='social_login'),
     path('logout/', views.logout, name='logout'),
     path('', views.index, name='index'),
-
+    path('main/', views.main, name='main'),
 ]

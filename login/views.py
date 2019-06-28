@@ -7,6 +7,9 @@ from django.http import *
 def login(request):
     return render(request, "login/login.html", {})
 
+def main(request):
+    return render(request, "login/main.html", {})
+
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect('/')
@@ -34,7 +37,7 @@ def index(request):
             # 새로운 유저 만들었을 때
             return render(request, 'home/index.html', {'newbie': True})
         #로그인 된 상태에서 index 리턴
-        return render(request, 'home/index.html', {'newbie':False})
+        return render(request, 'home/main.html', {'newbie':False})
     #로그아웃 된 상태에서 index 리턴
     return render(request, 'home/index.html', {'newbie':False})
 
