@@ -11,5 +11,5 @@ from . import views
 
 urlpatterns = [
     path('', views.file_upload),
-    path('sendRequest/', views.sendRequest),
+    path('makeDic/',views.makeDic),
 ]
